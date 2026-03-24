@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask import send_from_directory
 from flask_cors import CORS
 import requests
 
@@ -7,6 +8,9 @@ CORS(app)
 
 API_KEY = "d4499fca-fce7-4d65-998d-ce43ae42d0d0:fx"
 
+@app.route("/")
+def home():
+    return send_from_directory(".", "index.html")
 def translate(text, target_lang):
     url = "https://api-free.deepl.com/v2/translate"
     headers = {
@@ -29,4 +33,5 @@ def translate_api():
         "german": translate(text, "DE")
     })
 
-app.run(host="0.0.0.0", port=10000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
