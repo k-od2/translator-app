@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h2>翻訳アプリ</h2>
+
+<textarea id="input"></textarea><br>
+<button onclick="translate()">翻訳</button>
+
+<h3>英語</h3>
+<p id="en"></p>
+
+<h3>ドイツ語</h3>
+<p id="de"></p>
+
+<script>
+async function translate() {
+  const text = document.getElementById("input").value;
+
+  const res = await fetch("http://127.0.0.1:5000/translate", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({text})
+  });
+
+  const data = await res.json();
+  document.getElementById("en").innerText = data.english;
+  document.getElementById("de").innerText = data.german;
+}
+</script>
+
+</body>
+</html>
