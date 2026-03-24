@@ -1,0 +1,32 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import requests
+
+app = Flask(__name__)
+CORS(app)
+
+API_KEY = "d4499fca-fce7-4d65-998d-ce43ae42d0d0:fx"
+
+def translate(text, target_lang):
+    url = "https://api-free.deepl.com/v2/translate"
+    headers = {
+        "Authorization": f"DeepL-Auth-Key {API_KEY}"
+    }
+
+    data = {
+        "text": text,
+        "target_lang": target_lang
+    }
+    res = requests.post(url, headers=headers, data=data)
+    print(res.text)
+    return res.json()["translations"][0]["text"]
+
+@app.route("/translate", methods=["POST"])
+def translate_api():
+    text = request.json["text"]
+    return jsonify({
+        "english": translate(text, "EN"),
+        "german": translate(text, "DE")
+    })
+
+app.run(host="0.0.0.0", port=10000)
