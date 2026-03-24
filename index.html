@@ -2,22 +2,84 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+.result {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>翻訳アプリ</h2>
+<div class="container">
+  <h2>🌍 翻訳アプリ</h2>
 
-<textarea id="input"></textarea><br>
-<button onclick="translate()">翻訳</button>
+  <textarea id="input" placeholder="日本語を入力..."></textarea>
 
-<h3>英語</h3>
-<p id="en"></p>
+  <button id="btn">翻訳</button>
 
-<h3>ドイツ語</h3>
-<p id="de"></p>
+  <div class="result">
+    <strong>英語:</strong>
+    <p id="en"></p>
+  </div>
+
+  <div class="result">
+    <strong>ドイツ語:</strong>
+    <p id="de"></p>
+  </div>
+</div>
 
 <script>
-async function translate() {
+document.getElementById("input").addEventListener("input", async function() {
   const text = document.getElementById("input").value;
 
   const res = await fetch("http://127.0.0.1:5000/translate", {
@@ -29,7 +91,7 @@ async function translate() {
   const data = await res.json();
   document.getElementById("en").innerText = data.english;
   document.getElementById("de").innerText = data.german;
-}
+});
 </script>
 
 </body>
