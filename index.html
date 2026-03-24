@@ -82,7 +82,7 @@ button:hover {
 document.getElementById("input").addEventListener("input", async function() {
   const text = document.getElementById("input").value;
 
-  const res = await fetch("http://127.0.0.1:5000/translate", {
+  const res = await fetch("/translate", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text})
