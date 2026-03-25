@@ -26,6 +26,8 @@ def translate(text, target_lang):
     return res.json()["translations"][0]["text"]
 
 @app.route("/translate", methods=["POST"])
+def make_example(text):
+    return f"This is an example sentence using '{text}'."
 def translate_api():
     text = request.json["text"]
     return jsonify({
