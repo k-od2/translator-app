@@ -6,7 +6,8 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = "DEEPL_API_KEY"
+import os
+API_KEY = os.getenv("DEEPL_API_KEY")
 
 @app.route("/")
 def home():
