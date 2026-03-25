@@ -89,10 +89,12 @@ document.getElementById("input").addEventListener("input", async function() {
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text})
   });
-　document.getElementById("example").innerText = data.example;
+
   const data = await res.json();
+  
   document.getElementById("en").innerText = data.english;
   document.getElementById("de").innerText = data.german;
+  document.getElementById("example").innerText = data.example;
 });
 </script>
 
