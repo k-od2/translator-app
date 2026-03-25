@@ -31,9 +31,10 @@ def make_example(text):
 def translate_api():
     text = request.json["text"]
     return jsonify({
-        "english": translate(text, "EN"),
-        "german": translate(text, "DE")
-    })
+    "english": translate(text, "EN"),
+    "german": translate(text, "DE"),
+    "example": make_example(translate(text, "EN"))
+})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
