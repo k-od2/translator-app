@@ -33,7 +33,7 @@ def translate_api():
 en = translate(text, "EN")
 de = translate(text, "DE")
 
-return jsonify({
+    return jsonify({
     "english": en,
     "german": de,
     "example": make_example(en)
