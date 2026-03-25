@@ -30,8 +30,8 @@ def make_example(text):
     return f"This is an example sentence using '{text}'."
 def translate_api():
     text = request.json["text"]
-en = translate(text, "EN")
-de = translate(text, "DE")
+    en = translate(text, "EN")
+    de = translate(text, "DE")
 
     return jsonify({
     "english": en,
